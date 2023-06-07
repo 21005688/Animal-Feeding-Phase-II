@@ -1,6 +1,7 @@
 # Animal-Feeding-Phase-II
 
 ## Aim:
+To develop Animal feeding game-Phase-2 using unity .
 
 ## Algorithm:
 ### Random Animal Stampede
@@ -19,8 +20,76 @@
 ### Step 7: For all the animal prefabs and food in th inspector (below the  layer ) drop down the override option and choose apply all.
 
 ## Program:
+## SpawnManager
+```
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpawnManager : MonoBehaviour
+{
+    public GameObject[] animalPrefabs;
+    private float spawnRangex = 20;
+    private float spawnPosZ = 20;
+    private float startDelay = 2;
+    public float spawnInterval = 1.5f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        InvokeRepeating("SpawnRandomAnimal", startDelay, spawnInterval);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SpawnRandomAnimal();
+        }
+    }
+    void SpawnRandomAnimal()
+    {
+        int animalIndex = Random.Range(0, animalPrefabs.Length);
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 0, spawnPosZ);
+        Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
+    }
+}
+
+```
+## DetectCollision
+```
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DetectCollider : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+        Destroy(other.gameObject);
+    }
+}
+```
 
 ## Output:
+![1](https://github.com/21005688/Animal-Feeding-Phase-II/assets/94747031/de7e30b1-a174-4b60-9664-cd3e919904cf)
+
+
+![2](https://github.com/21005688/Animal-Feeding-Phase-II/assets/94747031/82d0ddc1-cd2e-4cf8-abab-782171c9cc75)
 
 ## Result:
+Animal feeding game-Phase-2 using unity is developed successfully.
 
